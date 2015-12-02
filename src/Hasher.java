@@ -32,13 +32,23 @@ public class Hasher {
     }
 
     /**
+     * Generates a hash and returns its array index.
+     *
+     * @param s String  The string to hash.
+     * @return  int     The calculated integer value.
+     */
+    public int generateHashAndGetArrayIndex(String s) {
+        return getIntFromHash(generateHash(s));
+    }
+
+    /**
      * Generates a hash out of a String according to Murmur-Hash3_128.
      *
      * @param s String		The String to hash.
      * @return	HashCode	The hash-value for the passed String.
      */
-    public int generateHash(String s) {
-        return getIntFromHash(h.hashBytes(s.getBytes()));
+    public HashCode generateHash(String s) {
+        return h.hashBytes(s.getBytes());
     }
 
     /**

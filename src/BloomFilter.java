@@ -44,11 +44,11 @@ public class BloomFilter {
      * array of k-different Hashing-functions.
      *
      * @param n int		The number of elements
-     * @param p	double	The wished error probability
+     * @param p	double	The desired error probability
      */
     public BloomFilter(int n, double p) {
-        this.n = n; // lines
-        this.p = p; // Fehlerwahrscheinlichkeit
+        this.n = n;
+        this.p = p;
         this.m = -1 * Math.ceil((n * Math.log(p)) / (Math.pow(Math.log(2.0), 2.0)));
         this.k = Math.round((m / n) * Math.log(2.0));
 
@@ -69,7 +69,7 @@ public class BloomFilter {
      */
     public void addToFilter(String s) {
         for(Hasher h : hashers) {
-            booleans[h.generateHash(s)] = true;
+            booleans[h.generateHashAndGetArrayIndex(s)] = true;
         }
     }
 
@@ -86,7 +86,7 @@ public class BloomFilter {
      */
     public boolean checkIfExists(String s) {
         for(Hasher h : hashers) {
-            if (!booleans[h.generateHash(s)]) return false;
+            if (!booleans[h.generateHashAndGetArrayIndex(s)]) return false;
         }
         return true;
     }
